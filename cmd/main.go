@@ -1,21 +1,21 @@
 package main
 
 import (
-	"github.com/huobirdcenter/huobi_golang/cmd/accountclientexample"
-	"github.com/huobirdcenter/huobi_golang/cmd/accountwebsocketclientexample"
-	"github.com/huobirdcenter/huobi_golang/cmd/algoorderclientexample"
-	"github.com/huobirdcenter/huobi_golang/cmd/commonclientexample"
-	"github.com/huobirdcenter/huobi_golang/cmd/crossmarginclientexample"
-	"github.com/huobirdcenter/huobi_golang/cmd/etfclientexample"
-	"github.com/huobirdcenter/huobi_golang/cmd/isolatedmarginclientexample"
-	"github.com/huobirdcenter/huobi_golang/cmd/marketclientexample"
-	"github.com/huobirdcenter/huobi_golang/cmd/marketwebsocketclientexample"
-	"github.com/huobirdcenter/huobi_golang/cmd/orderclientexample"
-	"github.com/huobirdcenter/huobi_golang/cmd/orderwebsocketclientexample"
-	"github.com/huobirdcenter/huobi_golang/cmd/stablecoinclientexample"
-	"github.com/huobirdcenter/huobi_golang/cmd/subuserclientexample"
-	"github.com/huobirdcenter/huobi_golang/cmd/walletclientexample"
-	"github.com/huobirdcenter/huobi_golang/logging/perflogger"
+	"github.com/yveshield/huobi_golang/cmd/accountclientexample"
+	"github.com/yveshield/huobi_golang/cmd/accountwebsocketclientexample"
+	"github.com/yveshield/huobi_golang/cmd/algoorderclientexample"
+	"github.com/yveshield/huobi_golang/cmd/commonclientexample"
+	"github.com/yveshield/huobi_golang/cmd/crossmarginclientexample"
+	"github.com/yveshield/huobi_golang/cmd/etfclientexample"
+	"github.com/yveshield/huobi_golang/cmd/isolatedmarginclientexample"
+	"github.com/yveshield/huobi_golang/cmd/marketclientexample"
+	"github.com/yveshield/huobi_golang/cmd/marketwebsocketclientexample"
+	"github.com/yveshield/huobi_golang/cmd/orderclientexample"
+	"github.com/yveshield/huobi_golang/cmd/orderwebsocketclientexample"
+	"github.com/yveshield/huobi_golang/cmd/stablecoinclientexample"
+	"github.com/yveshield/huobi_golang/cmd/subuserclientexample"
+	"github.com/yveshield/huobi_golang/cmd/walletclientexample"
+	"github.com/yveshield/huobi_golang/logging/perflogger"
 )
 
 func main() {

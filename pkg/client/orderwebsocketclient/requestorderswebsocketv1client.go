@@ -2,9 +2,9 @@ package orderwebsocketclient
 
 import (
 	"encoding/json"
-	"github.com/huobirdcenter/huobi_golang/pkg/client/websocketclientbase"
-	"github.com/huobirdcenter/huobi_golang/pkg/model"
-	"github.com/huobirdcenter/huobi_golang/pkg/model/order"
+	"github.com/yveshield/huobi_golang/pkg/client/websocketclientbase"
+	"github.com/yveshield/huobi_golang/pkg/model"
+	"github.com/yveshield/huobi_golang/pkg/model/order"
 )
 
 // Responsible to handle orders request from WebSocket

@@ -1,7 +1,7 @@
 package market
 
 import (
-	"github.com/huobirdcenter/huobi_golang/pkg/model/base"
+	"github.com/yveshield/huobi_golang/pkg/model/base"
 	"github.com/shopspring/decimal"
 )
 
