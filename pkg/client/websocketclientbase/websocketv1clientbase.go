@@ -135,7 +135,7 @@ func (p *WebSocketV1ClientBase) disconnectWebSocket() {
 		return
 	}
 
-	applogger.Info("WebSocket disconnected")
+	applogger.Debug("WebSocket disconnected")
 }
 
 // initialize a ticker and start a goroutine tickerLoop()
