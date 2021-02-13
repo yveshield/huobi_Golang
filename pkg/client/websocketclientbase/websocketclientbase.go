@@ -110,7 +110,7 @@ func (p *WebSocketClientBase) connectWebSocket() {
 		applogger.Error("WebSocket connected error: %s", err)
 		return
 	}
-	applogger.Info("WebSocket connected")
+	applogger.Debug("WebSocket connected")
 
 	p.startReadLoop()
 

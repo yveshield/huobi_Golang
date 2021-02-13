@@ -33,7 +33,7 @@ func (p *TradeWebSocketClient) Request(symbol string, clientId string) {
 
 	p.Send(req)
 
-	applogger.Info("WebSocket requested, topic=%s, clientId=%s", topic, clientId)
+	applogger.Debug("WebSocket requested, topic=%s, clientId=%s", topic, clientId)
 }
 
 // Subscribe latest completed trade in tick by tick mode
@@ -43,7 +43,7 @@ func (p *TradeWebSocketClient) Subscribe(symbol string, clientId string) {
 
 	p.Send(sub)
 
-	applogger.Info("WebSocket subscribed, topic=%s, clientId=%s", topic, clientId)
+	applogger.Debug("WebSocket subscribed, topic=%s, clientId=%s", topic, clientId)
 }
 
 // Unsubscribe trade
@@ -53,7 +53,7 @@ func (p *TradeWebSocketClient) UnSubscribe(symbol string, clientId string) {
 
 	p.Send(unsub)
 
-	applogger.Info("WebSocket unsubscribed, topic=%s, clientId=%s", topic, clientId)
+	applogger.Debug("WebSocket unsubscribed, topic=%s, clientId=%s", topic, clientId)
 }
 
 func (p *TradeWebSocketClient) handleMessage(msg string) (interface{}, error) {

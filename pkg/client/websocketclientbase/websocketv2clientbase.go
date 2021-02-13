@@ -105,7 +105,7 @@ func (p *WebSocketV2ClientBase) connectWebSocket() {
 		applogger.Error("WebSocket connected error: %s", err)
 		return
 	}
-	applogger.Info("WebSocket connected")
+	applogger.Debug("WebSocket connected")
 
 	auth, err := p.requestBuilder.Build()
 	if err != nil {
