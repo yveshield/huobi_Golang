@@ -9,12 +9,17 @@ import (
 
 var (
 	spBuffer sync.Pool
+	spWriter sync.Pool
 )
 
 func init() {
 	// 公共对象池,更极致的优化可以建多个池
 	spBuffer = sync.Pool{New: func() interface{} {
 		return new(bytes.Buffer)
+	}}
+	spWriter = sync.Pool{New: func() interface{} {
+		buf := new(bytes.Buffer)
+		return gzip.NewWriter(buf)
 	}}
 }
 
@@ -25,11 +30,10 @@ func GZipDecompress(input []byte) (string, error) {
 		buf.Reset()
 		spBuffer.Put(buf)
 	}()
-	_, berr := buf.Write(input)
-	if berr != nil {
-		return "", berr
+	_, err := buf.Write(input)
+	if err != nil {
+		return "", err
 	}
-	// buf := bytes.NewBuffer(input)
 	reader, gzipErr := gzip.NewReader(buf)
 	if gzipErr != nil {
 		return "", gzipErr
@@ -45,20 +49,27 @@ func GZipDecompress(input []byte) (string, error) {
 }
 
 func GZipCompress(input string) ([]byte, error) {
-	var buf bytes.Buffer
-	gz := gzip.NewWriter(&buf)
-
-	_, err := gz.Write([]byte(input))
+	buf := spBuffer.Get().(*bytes.Buffer)
+	gw := spWriter.Get().(*gzip.Writer)
+	gw.Reset(buf)
+	defer func() {
+		// 归还buff
+		buf.Reset()
+		spBuffer.Put(buf)
+		// 归还Writer
+		spWriter.Put(gw)
+	}()
+	_, err := gw.Write([]byte(input))
 	if err != nil {
 		return nil, err
 	}
 
-	err = gz.Flush()
+	err = gw.Flush()
 	if err != nil {
 		return nil, err
 	}
 
-	err = gz.Close()
+	err = gw.Close()
 	if err != nil {
 		return nil, err
 	}
