@@ -12,3 +12,11 @@ func Test_Decompress_Success(t *testing.T) {
 		t.Errorf("expected: %s, actual: %s", expected, result)
 	}
 }
+
+func Benchmark_Decompress_Success(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		buf, _ := GZipCompress("huobi")
+
+		_, _ = GZipDecompress(buf)
+	}
+}

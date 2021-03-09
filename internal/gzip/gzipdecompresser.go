@@ -4,10 +4,32 @@ import (
 	"bytes"
 	"compress/gzip"
 	"io/ioutil"
+	"sync"
 )
 
+var (
+	spBuffer sync.Pool
+)
+
+func init() {
+	// 公共对象池,更极致的优化可以建多个池
+	spBuffer = sync.Pool{New: func() interface{} {
+		return new(bytes.Buffer)
+	}}
+}
+
 func GZipDecompress(input []byte) (string, error) {
-	buf := bytes.NewBuffer(input)
+	buf := spBuffer.Get().(*bytes.Buffer)
+	defer func() {
+		// 归还buff
+		buf.Reset()
+		spBuffer.Put(buf)
+	}()
+	_, berr := buf.Write(input)
+	if berr != nil {
+		return "", berr
+	}
+	// buf := bytes.NewBuffer(input)
 	reader, gzipErr := gzip.NewReader(buf)
 	if gzipErr != nil {
 		return "", gzipErr
