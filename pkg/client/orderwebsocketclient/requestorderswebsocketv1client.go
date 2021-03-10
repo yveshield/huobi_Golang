@@ -1,7 +1,8 @@
 package orderwebsocketclient
 
 import (
-	"encoding/json"
+	jsoniter "github.com/json-iterator/go"
+
 	"github.com/yveshield/huobi_golang/pkg/client/websocketclientbase"
 	"github.com/yveshield/huobi_golang/pkg/model"
 	"github.com/yveshield/huobi_golang/pkg/model/order"
@@ -35,6 +36,7 @@ func (p *RequestOrdersWebSocketV1Client) Request(req order.RequestOrdersRequest)
 
 func (p *RequestOrdersWebSocketV1Client) handleMessage(msg string) (interface{}, error) {
 	result := order.RequestOrdersV1Response{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	err := json.Unmarshal([]byte(msg), &result)
 	return result, err
 }

@@ -1,17 +1,19 @@
 package client
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
+	"strconv"
+	"strings"
+
+	jsoniter "github.com/json-iterator/go"
+
 	"github.com/yveshield/huobi_golang/internal"
 	"github.com/yveshield/huobi_golang/internal/requestbuilder"
 	"github.com/yveshield/huobi_golang/pkg/model"
 	"github.com/yveshield/huobi_golang/pkg/model/account"
 	"github.com/yveshield/huobi_golang/pkg/model/subuser"
 	"github.com/yveshield/huobi_golang/pkg/model/wallet"
-	"strconv"
-	"strings"
 )
 
 // Responsible to operate wallet
@@ -36,6 +38,7 @@ func (p *SubUserClient) CreateSubUser(request subuser.CreateSubUserRequest) ([]s
 	}
 
 	result := subuser.CreateSubUserResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -60,6 +63,7 @@ func (p *SubUserClient) SubUserManagement(request subuser.SubUserManagementReque
 	}
 
 	result := subuser.SubUserManagementResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -69,7 +73,6 @@ func (p *SubUserClient) SubUserManagement(request subuser.SubUserManagementReque
 	}
 	return result.Data, nil
 }
-
 
 // Set Tradable Market for Sub Users
 func (p *SubUserClient) SetSubUserTradableMarket(request subuser.SetSubUserTradableMarketRequest) ([]subuser.TradableMarket, error) {
@@ -85,6 +88,7 @@ func (p *SubUserClient) SetSubUserTradableMarket(request subuser.SetSubUserTrada
 	}
 
 	result := subuser.SetSubUserTradableMarketResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -110,6 +114,7 @@ func (p *SubUserClient) SetSubUserTransferability(request subuser.SetSubUserTran
 	}
 
 	result := subuser.SetSubUserTransferabilityResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -153,6 +158,7 @@ func (p *SubUserClient) GetSubUserDepositAddress(subUid int64, currency string) 
 	}
 
 	result := wallet.GetDepositAddressResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -195,6 +201,7 @@ func (p *SubUserClient) QuerySubUserDepositHistory(subUid int64, optionalRequest
 	}
 
 	result := subuser.QuerySubUserDepositHistoryResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -213,6 +220,7 @@ func (p *SubUserClient) GetSubUserAggregateBalance() ([]account.Balance, error) 
 		return nil, getErr
 	}
 	result := account.GetSubUserAggregateBalanceResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -233,6 +241,7 @@ func (p *SubUserClient) GetSubUserAccount(subUid int64) ([]account.SubUserAccoun
 		return nil, getErr
 	}
 	result := account.GetSubUserAccountResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -251,6 +260,7 @@ func (p *SubUserClient) GetUid() (int64, error) {
 		return 0, getErr
 	}
 	result := account.GetUidResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return 0, jsonErr

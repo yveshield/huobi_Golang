@@ -1,6 +1,8 @@
 package auth
 
-import "encoding/json"
+import (
+	jsoniter "github.com/json-iterator/go"
+)
 
 type WebSocketV1AuthenticationResponse struct {
 	Op        string `json:"op"`
@@ -17,6 +19,7 @@ func (p *WebSocketV1AuthenticationResponse) IsAuth() bool {
 
 func ParseWSV1AuthResp(message string) *WebSocketV1AuthenticationResponse {
 	result := &WebSocketV1AuthenticationResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	err := json.Unmarshal([]byte(message), result)
 	if err != nil {
 		return nil

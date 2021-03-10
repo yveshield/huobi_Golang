@@ -1,13 +1,15 @@
 package client
 
 import (
-	"encoding/json"
 	"errors"
+	"strconv"
+
+	jsoniter "github.com/json-iterator/go"
+
 	"github.com/yveshield/huobi_golang/internal"
 	"github.com/yveshield/huobi_golang/internal/requestbuilder"
 	"github.com/yveshield/huobi_golang/pkg/model"
 	"github.com/yveshield/huobi_golang/pkg/model/margin"
-	"strconv"
 )
 
 // Responsible to operate cross margin
@@ -36,6 +38,7 @@ func (p *CrossMarginClient) TransferIn(request margin.CrossMarginTransferRequest
 	}
 
 	result := margin.TransferResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return 0, jsonErr
@@ -62,6 +65,7 @@ func (p *CrossMarginClient) TransferOut(request margin.CrossMarginTransferReques
 	}
 
 	result := margin.TransferResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return 0, jsonErr
@@ -84,6 +88,7 @@ func (p *CrossMarginClient) GetMarginLoanInfo() ([]margin.CrossMarginLoanInfo, e
 	}
 
 	result := margin.GetCrossMarginLoanInfoResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -110,6 +115,7 @@ func (p *CrossMarginClient) ApplyLoan(request margin.CrossMarginOrdersRequest) (
 	}
 
 	result := margin.MarginOrdersResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return 0, jsonErr
@@ -135,6 +141,7 @@ func (p *CrossMarginClient) Repay(orderId string, request margin.MarginOrdersRep
 	}
 
 	result := margin.MarginOrdersRepayResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return 0, jsonErr
@@ -181,6 +188,7 @@ func (p *CrossMarginClient) MarginLoanOrders(optionalRequest margin.CrossMarginL
 	}
 
 	result := margin.CrossMarginLoanOrdersResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -206,6 +214,7 @@ func (p *CrossMarginClient) MarginAccountsBalance(SubUid string) (*margin.CrossM
 	}
 
 	result := margin.CrossMarginAccountsBalanceResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -232,6 +241,7 @@ func (p *CrossMarginClient) GeneralRepay(request margin.CrossMarginGeneralReplay
 	}
 
 	result := margin.CrossMarginGeneralReplyLoanResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -256,10 +266,10 @@ func (p *CrossMarginClient) GeneralMarginLoanOrders(optionalRequest margin.Cross
 		request.AddParam("currency", optionalRequest.Currency)
 	}
 	if optionalRequest.StartDate != 0 {
-		request.AddParam("startDate", strconv.FormatInt(optionalRequest.StartDate,10))
+		request.AddParam("startDate", strconv.FormatInt(optionalRequest.StartDate, 10))
 	}
 	if optionalRequest.EndDate != 0 {
-		request.AddParam("endDate", strconv.FormatInt(optionalRequest.EndDate,10))
+		request.AddParam("endDate", strconv.FormatInt(optionalRequest.EndDate, 10))
 	}
 	if optionalRequest.Sort != "" {
 		request.AddParam("sort", optionalRequest.Sort)
@@ -268,7 +278,7 @@ func (p *CrossMarginClient) GeneralMarginLoanOrders(optionalRequest margin.Cross
 		request.AddParam("limit", strconv.Itoa(optionalRequest.Limit))
 	}
 	if optionalRequest.FromId != 0 {
-		request.AddParam("fromId", strconv.FormatInt(optionalRequest.FromId,10))
+		request.AddParam("fromId", strconv.FormatInt(optionalRequest.FromId, 10))
 	}
 
 	url := p.privateUrlBuilder.Build("GET", "/v2/account/repayment", request)
@@ -278,6 +288,7 @@ func (p *CrossMarginClient) GeneralMarginLoanOrders(optionalRequest margin.Cross
 	}
 
 	result := margin.CrossMarginGeneralReplyLoanRecordsResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -288,4 +299,3 @@ func (p *CrossMarginClient) GeneralMarginLoanOrders(optionalRequest margin.Cross
 
 	return nil, errors.New(getResp)
 }
-

@@ -1,13 +1,15 @@
 package client
 
 import (
-	"encoding/json"
 	"errors"
+	"strconv"
+
+	jsoniter "github.com/json-iterator/go"
+
 	"github.com/yveshield/huobi_golang/internal"
 	"github.com/yveshield/huobi_golang/internal/requestbuilder"
 	"github.com/yveshield/huobi_golang/pkg/model"
 	"github.com/yveshield/huobi_golang/pkg/model/account"
-	"strconv"
 )
 
 // Responsible to operate account
@@ -29,6 +31,7 @@ func (p *AccountClient) GetAccountInfo() ([]account.AccountInfo, error) {
 		return nil, getErr
 	}
 	result := account.GetAccountInfoResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -49,6 +52,7 @@ func (p *AccountClient) GetAccountBalance(accountId string) (*account.AccountBal
 		return nil, getErr
 	}
 	result := account.GetAccountBalanceResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -77,6 +81,7 @@ func (p *AccountClient) GetAccountAssetValuation(accountType string, valuationCu
 		return nil, getErr
 	}
 	result := account.GetAccountAssetValuationResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -101,6 +106,7 @@ func (p *AccountClient) TransferAccount(request account.TransferAccountRequest) 
 	}
 
 	result := account.TransferAccountResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -141,6 +147,7 @@ func (p *AccountClient) GetAccountHistory(accountId string, optionalRequest acco
 		return nil, getErr
 	}
 	result := account.GetAccountHistoryResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -185,6 +192,7 @@ func (p *AccountClient) GetAccountLedger(accountId string, optionalRequest accou
 		return nil, getErr
 	}
 	result := account.GetAccountLedgerResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -210,6 +218,7 @@ func (p *AccountClient) FuturesTransfer(request account.FuturesTransferRequest) 
 	}
 
 	result := account.FuturesTransferResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return 0, jsonErr
@@ -220,7 +229,6 @@ func (p *AccountClient) FuturesTransfer(request account.FuturesTransferRequest) 
 	}
 	return result.Data, nil
 }
-
 
 // Returns the point balance of specified user's account
 func (p *AccountClient) GetPointBalance(subUid string) (*account.GetPointBalanceResponse, error) {
@@ -233,6 +241,7 @@ func (p *AccountClient) GetPointBalance(subUid string) (*account.GetPointBalance
 		return nil, getErr
 	}
 	result := account.GetPointBalanceResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -258,6 +267,7 @@ func (p *AccountClient) TransferPoint(request account.TransferPointRequest) (*ac
 	}
 
 	result := account.TransferPointResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr

@@ -1,7 +1,8 @@
 package auth
 
 import (
-	"encoding/json"
+	jsoniter "github.com/json-iterator/go"
+
 	"github.com/yveshield/huobi_golang/pkg/model/base"
 )
 
@@ -11,6 +12,7 @@ type WebSocketV2AuthenticationResponse struct {
 
 func ParseWSV2AuthResp(message string) *WebSocketV2AuthenticationResponse {
 	result := &WebSocketV2AuthenticationResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	err := json.Unmarshal([]byte(message), result)
 	if err != nil {
 		return nil

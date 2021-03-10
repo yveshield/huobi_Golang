@@ -1,13 +1,15 @@
 package client
 
 import (
-	"encoding/json"
 	"errors"
+	"strconv"
+
+	jsoniter "github.com/json-iterator/go"
+
 	"github.com/yveshield/huobi_golang/internal"
 	"github.com/yveshield/huobi_golang/internal/requestbuilder"
 	"github.com/yveshield/huobi_golang/pkg/model"
 	"github.com/yveshield/huobi_golang/pkg/model/etf"
-	"strconv"
 )
 
 // Responsible to operate ETF
@@ -34,6 +36,7 @@ func (p *ETFClient) GetSwapConfig(etfName string) (*etf.SwapConfig, error) {
 	}
 
 	result := etf.GetSwapConfigResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -58,6 +61,7 @@ func (p *ETFClient) SwapIn(request etf.SwapRequest) (bool, error) {
 		return false, postErr
 	}
 	result := etf.SwapResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return false, jsonErr
@@ -83,6 +87,7 @@ func (p *ETFClient) SwapOut(request etf.SwapRequest) (bool, error) {
 		return false, postErr
 	}
 	result := etf.SwapResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return false, jsonErr
@@ -110,6 +115,7 @@ func (p *ETFClient) GetSwapList(etfName string, offset int, limit int) ([]*etf.S
 	}
 
 	result := etf.GetSwapListResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr

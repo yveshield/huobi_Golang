@@ -1,6 +1,8 @@
 package model
 
-import "encoding/json"
+import (
+	jsoniter "github.com/json-iterator/go"
+)
 
 type PingMessage struct {
 	Ping int64 `json:"ping"`
@@ -8,6 +10,7 @@ type PingMessage struct {
 
 func ParsePingMessage(message string) *PingMessage {
 	result := PingMessage{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	err := json.Unmarshal([]byte(message), &result)
 	if err != nil {
 		return nil

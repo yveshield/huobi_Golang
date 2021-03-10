@@ -1,13 +1,15 @@
 package client
 
 import (
-	"encoding/json"
 	"errors"
+	"strconv"
+
+	jsoniter "github.com/json-iterator/go"
+
 	"github.com/yveshield/huobi_golang/internal"
 	"github.com/yveshield/huobi_golang/internal/requestbuilder"
 	"github.com/yveshield/huobi_golang/pkg/model"
 	"github.com/yveshield/huobi_golang/pkg/model/wallet"
-	"strconv"
 )
 
 // Responsible to operate wallet
@@ -34,6 +36,7 @@ func (p *WalletClient) GetDepositAddress(currency string) ([]wallet.DepositAddre
 	}
 
 	result := wallet.GetDepositAddressResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -57,6 +60,7 @@ func (p *WalletClient) GetWithdrawQuota(currency string) (*wallet.WithdrawQuota,
 	}
 
 	result := wallet.GetWithdrawQuotaResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -67,7 +71,6 @@ func (p *WalletClient) GetWithdrawQuota(currency string) (*wallet.WithdrawQuota,
 	return nil, errors.New(getResp)
 }
 
-
 //  Parent user to query withdraw address available for API key
 func (p *WalletClient) GetWithdrawAddress(request *model.GetRequest) (*wallet.GetWithdrawAddressResponse, error) {
 	url := p.privateUrlBuilder.Build("GET", "/v2/account/withdraw/address", request)
@@ -77,6 +80,7 @@ func (p *WalletClient) GetWithdrawAddress(request *model.GetRequest) (*wallet.Ge
 	}
 
 	result := wallet.GetWithdrawAddressResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -98,6 +102,7 @@ func (p *WalletClient) CreateWithdraw(request wallet.CreateWithdrawRequest) (int
 	}
 
 	result := wallet.CreateWithdrawResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return 0, jsonErr
@@ -118,6 +123,7 @@ func (p *WalletClient) CancelWithdraw(withdrawId int64) (int64, error) {
 		return 0, postErr
 	}
 	result := wallet.CancelWithdrawResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return 0, jsonErr
@@ -156,6 +162,7 @@ func (p *WalletClient) QueryDepositWithdraw(depositOrWithdraw string, optionalRe
 	}
 
 	result := wallet.QueryDepositWithdrawResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
