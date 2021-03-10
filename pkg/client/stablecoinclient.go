@@ -1,9 +1,11 @@
 package client
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
+
+	jsoniter "github.com/json-iterator/go"
+
 	"github.com/yveshield/huobi_golang/internal"
 	"github.com/yveshield/huobi_golang/internal/requestbuilder"
 	"github.com/yveshield/huobi_golang/pkg/model"
@@ -35,6 +37,7 @@ func (p *StableCoinClient) GetExchangeRate(currency string, amount string, excha
 	}
 
 	result := stablecoin.GetExchangeRateResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -56,6 +59,7 @@ func (p *StableCoinClient) ExchangeStableCoin(quoteId string) (*stablecoin.Excha
 	}
 
 	result := stablecoin.ExchangeStableCoinResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr

@@ -1,8 +1,10 @@
 package client
 
 import (
-	"encoding/json"
 	"fmt"
+
+	jsoniter "github.com/json-iterator/go"
+
 	"github.com/yveshield/huobi_golang/internal"
 	"github.com/yveshield/huobi_golang/internal/requestbuilder"
 	"github.com/yveshield/huobi_golang/pkg/model"
@@ -31,6 +33,7 @@ func (p *OrderClient) PlaceOrder(request *order.PlaceOrderRequest) (*order.Place
 	}
 
 	result := order.PlaceOrderResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -51,6 +54,7 @@ func (p *OrderClient) PlaceOrders(request []order.PlaceOrderRequest) (*order.Pla
 	}
 
 	result := order.PlaceOrdersResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -69,6 +73,7 @@ func (p *OrderClient) CancelOrderById(orderId string) (*order.CancelOrderByIdRes
 	}
 
 	result := order.CancelOrderByIdResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -87,6 +92,7 @@ func (p *OrderClient) CancelOrderByClientOrderId(clientOrderId string) (*order.C
 	}
 
 	result := order.CancelOrderByClientResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -104,6 +110,7 @@ func (p *OrderClient) GetOpenOrders(request *model.GetRequest) (*order.GetOpenOr
 	}
 
 	result := order.GetOpenOrdersResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -123,6 +130,7 @@ func (p *OrderClient) CancelOrdersByCriteria(request *order.CancelOrdersByCriter
 	}
 
 	result := order.CancelOrdersByCriteriaResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -142,6 +150,7 @@ func (p *OrderClient) CancelOrdersByIds(request *order.CancelOrdersByIdsRequest)
 	}
 
 	result := order.CancelOrdersByIdsResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -160,6 +169,7 @@ func (p *OrderClient) GetOrderById(orderId string) (*order.GetOrderResponse, err
 	}
 
 	result := order.GetOrderResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -177,6 +187,7 @@ func (p *OrderClient) GetOrderByCriteria(request *model.GetRequest) (*order.GetO
 	}
 
 	result := order.GetOrderResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -195,6 +206,7 @@ func (p *OrderClient) GetMatchResultsById(orderId string) (*order.GetMatchResult
 	}
 
 	result := order.GetMatchResultsResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -212,6 +224,7 @@ func (p *OrderClient) GetHistoryOrders(request *model.GetRequest) (*order.GetHis
 	}
 
 	result := order.GetHistoryOrdersResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -229,6 +242,7 @@ func (p *OrderClient) GetLast48hOrders(request *model.GetRequest) (*order.GetHis
 	}
 
 	result := order.GetHistoryOrdersResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -246,6 +260,7 @@ func (p *OrderClient) GetMatchResultsByCriteria(request *model.GetRequest) (*ord
 	}
 
 	result := order.GetMatchResultsResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -263,6 +278,7 @@ func (p *OrderClient) GetTransactFeeRate(request *model.GetRequest) (*order.GetT
 	}
 
 	result := order.GetTransactFeeRateResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr

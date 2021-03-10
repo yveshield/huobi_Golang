@@ -1,8 +1,10 @@
 package accountwebsocketclient
 
 import (
-	"encoding/json"
 	"fmt"
+
+	jsoniter "github.com/json-iterator/go"
+
 	"github.com/yveshield/huobi_golang/pkg/client/websocketclientbase"
 	"github.com/yveshield/huobi_golang/pkg/model/account"
 )
@@ -35,6 +37,7 @@ func (p *RequestAccountWebSocketV1Client) Request(clientId string) error {
 
 func (p *RequestAccountWebSocketV1Client) handleMessage(msg string) (interface{}, error) {
 	result := account.RequestAccountV1Response{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	err := json.Unmarshal([]byte(msg), &result)
 	return result, err
 }

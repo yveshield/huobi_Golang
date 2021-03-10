@@ -1,13 +1,15 @@
 package client
 
 import (
-	"encoding/json"
 	"errors"
+	"strconv"
+
+	jsoniter "github.com/json-iterator/go"
+
 	"github.com/yveshield/huobi_golang/internal"
 	"github.com/yveshield/huobi_golang/internal/requestbuilder"
 	"github.com/yveshield/huobi_golang/pkg/model"
 	"github.com/yveshield/huobi_golang/pkg/model/margin"
-	"strconv"
 )
 
 // Responsible to operate isolated margin
@@ -36,6 +38,7 @@ func (p *IsolatedMarginClient) TransferIn(request margin.IsolatedMarginTransferR
 	}
 
 	result := margin.TransferResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return 0, jsonErr
@@ -62,6 +65,7 @@ func (p *IsolatedMarginClient) TransferOut(request margin.IsolatedMarginTransfer
 	}
 
 	result := margin.TransferResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return 0, jsonErr
@@ -85,6 +89,7 @@ func (p *IsolatedMarginClient) GetMarginLoanInfo(optionalRequest margin.GetMargi
 	}
 
 	result := margin.GetIsolatedMarginLoanInfoResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -111,6 +116,7 @@ func (p *IsolatedMarginClient) Apply(request margin.IsolatedMarginOrdersRequest)
 	}
 
 	result := margin.MarginOrdersResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return 0, jsonErr
@@ -137,6 +143,7 @@ func (p *IsolatedMarginClient) Repay(orderId string, request margin.MarginOrders
 	}
 
 	result := margin.MarginOrdersRepayResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return 0, jsonErr
@@ -180,6 +187,7 @@ func (p *IsolatedMarginClient) MarginLoanOrders(symbol string, optionalRequest m
 	}
 
 	result := margin.IsolatedMarginLoanOrdersResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -209,6 +217,7 @@ func (p *IsolatedMarginClient) MarginAccountsBalance(optionalRequest margin.Marg
 	}
 
 	result := margin.IsolatedMarginAccountsBalanceResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr

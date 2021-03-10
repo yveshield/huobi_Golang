@@ -1,8 +1,10 @@
 package marketwebsocketclient
 
 import (
-	"encoding/json"
 	"fmt"
+
+	jsoniter "github.com/json-iterator/go"
+
 	"github.com/yveshield/huobi_golang/logging/applogger"
 	"github.com/yveshield/huobi_golang/pkg/client/websocketclientbase"
 	"github.com/yveshield/huobi_golang/pkg/model/market"
@@ -58,6 +60,7 @@ func (p *Last24hCandlestickWebSocketClient) UnSubscribe(symbol string, clientId 
 
 func (p *Last24hCandlestickWebSocketClient) handleMessage(msg string) (interface{}, error) {
 	result := market.SubscribeLast24hCandlestickResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	err := json.Unmarshal([]byte(msg), &result)
 	return result, err
 }

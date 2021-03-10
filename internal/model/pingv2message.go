@@ -1,6 +1,8 @@
 package model
 
-import "encoding/json"
+import (
+	jsoniter "github.com/json-iterator/go"
+)
 
 type PingV2Message struct {
 	Action string `json:"action"`
@@ -15,6 +17,7 @@ func (p *PingV2Message) IsPing() bool {
 
 func ParsePingV2Message(message string) *PingV2Message {
 	result := PingV2Message{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	err := json.Unmarshal([]byte(message), &result)
 	if err != nil {
 		return nil

@@ -1,8 +1,9 @@
 package marketwebsocketclient
 
 import (
-	"encoding/json"
 	"fmt"
+
+	jsoniter "github.com/json-iterator/go"
 	"github.com/yveshield/huobi_golang/logging/applogger"
 	"github.com/yveshield/huobi_golang/pkg/client/websocketclientbase"
 	"github.com/yveshield/huobi_golang/pkg/model/market"
@@ -58,6 +59,7 @@ func (p *TradeWebSocketClient) UnSubscribe(symbol string, clientId string) {
 
 func (p *TradeWebSocketClient) handleMessage(msg string) (interface{}, error) {
 	result := market.SubscribeTradeResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	err := json.Unmarshal([]byte(msg), &result)
 	return result, err
 }

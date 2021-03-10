@@ -1,10 +1,12 @@
 package requestbuilder
 
 import (
-	"encoding/json"
-	"github.com/yveshield/huobi_golang/internal/model"
 	"testing"
 	"time"
+
+	jsoniter "github.com/json-iterator/go"
+
+	"github.com/yveshield/huobi_golang/internal/model"
 )
 
 func TestWebSocketV1RequestBuilder_build_Time_Success(t *testing.T) {
@@ -17,6 +19,7 @@ func TestWebSocketV1RequestBuilder_build_Time_Success(t *testing.T) {
 	}
 
 	authReq := &model.WebSocketV1AuthenticationRequest{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	err = json.Unmarshal([]byte(str), authReq)
 	if err != nil {
 		t.Error(err)

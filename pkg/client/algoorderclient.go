@@ -1,7 +1,7 @@
 package client
 
 import (
-	"encoding/json"
+	jsoniter "github.com/json-iterator/go"
 	"github.com/yveshield/huobi_golang/internal"
 	"github.com/yveshield/huobi_golang/internal/requestbuilder"
 	"github.com/yveshield/huobi_golang/pkg/model"
@@ -30,6 +30,7 @@ func (p *AlgoOrderClient) PlaceOrder(request *algoorder.PlaceOrderRequest) (*alg
 	}
 
 	result := algoorder.PlaceOrderResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -49,6 +50,7 @@ func (p *AlgoOrderClient) CancelOrder(request *algoorder.CancelOrdersRequest) (*
 	}
 
 	result := algoorder.CancelOrdersResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr = json.Unmarshal([]byte(postResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -65,6 +67,7 @@ func (p *AlgoOrderClient) GetOpenOrders(request *model.GetRequest) (*algoorder.G
 	}
 
 	result := algoorder.GetOpenOrdersResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -81,6 +84,7 @@ func (p *AlgoOrderClient) GetHistoryOrders(request *model.GetRequest) (*algoorde
 	}
 
 	result := algoorder.GetHistoryOrdersResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -97,6 +101,7 @@ func (p *AlgoOrderClient) GetSpecificOrder(request *model.GetRequest) (*algoorde
 	}
 
 	result := algoorder.GetSpecificOrderResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr

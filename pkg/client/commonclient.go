@@ -1,8 +1,9 @@
 package client
 
 import (
-	"encoding/json"
 	"errors"
+
+	jsoniter "github.com/json-iterator/go"
 	"github.com/yveshield/huobi_golang/internal"
 	"github.com/yveshield/huobi_golang/internal/requestbuilder"
 	"github.com/yveshield/huobi_golang/pkg/model"
@@ -39,6 +40,7 @@ func (p *CommonClient) GetMarketStatus() (*common.MarketStatus, error) {
 	}
 
 	result := common.GetMarketStatusResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -59,6 +61,7 @@ func (p *CommonClient) GetSymbols() ([]common.Symbol, error) {
 	}
 
 	result := common.GetSymbolsResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -79,6 +82,7 @@ func (p *CommonClient) GetCurrencys() ([]string, error) {
 	}
 
 	result := common.GetCurrenciesResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 
 	if jsonErr != nil {
@@ -109,6 +113,7 @@ func (p *CommonClient) GetV2ReferenceCurrencies(optionalRequest common.GetV2Refe
 	}
 
 	result := common.GetV2ReferenceCurrenciesResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 
 	if jsonErr != nil {
@@ -132,6 +137,7 @@ func (p *CommonClient) GetTimestamp() (int, error) {
 	}
 
 	result := common.GetTimestampResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 
 	if jsonErr != nil {

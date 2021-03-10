@@ -1,13 +1,15 @@
 package client
 
 import (
-	"encoding/json"
 	"errors"
+	"strconv"
+
+	jsoniter "github.com/json-iterator/go"
+
 	"github.com/yveshield/huobi_golang/internal"
 	"github.com/yveshield/huobi_golang/internal/requestbuilder"
 	"github.com/yveshield/huobi_golang/pkg/model"
 	"github.com/yveshield/huobi_golang/pkg/model/market"
-	"strconv"
 )
 
 // Responsible to get market information
@@ -40,6 +42,7 @@ func (client *MarketClient) GetCandlestick(symbol string, optionalRequest market
 	}
 
 	result := market.GetCandlestickResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -64,6 +67,7 @@ func (client *MarketClient) GetLast24hCandlestickAskBid(symbol string) (*market.
 	}
 
 	result := market.GetLast24hCandlestickAskBidResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -88,6 +92,7 @@ func (client *MarketClient) GetAllSymbolsLast24hCandlesticksAskBid() ([]market.S
 	}
 
 	result := market.GetAllSymbolsLast24hCandlesticksAskBidResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -117,7 +122,7 @@ func (client *MarketClient) GetDepth(symbol string, step string, optionalRequest
 	}
 
 	result := market.GetDepthResponse{}
-
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -143,6 +148,7 @@ func (client *MarketClient) GetLatestTrade(symbol string) (*market.TradeTick, er
 	}
 
 	result := market.GetLatestTradeResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -171,7 +177,7 @@ func (client *MarketClient) GetHistoricalTrade(symbol string, optionalRequest ma
 	}
 
 	result := market.GetHistoricalTradeResponse{}
-
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr
@@ -197,6 +203,7 @@ func (client *MarketClient) GetLast24hCandlestick(symbol string) (*market.Candle
 	}
 
 	result := market.GetLast24hCandlestick{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	jsonErr := json.Unmarshal([]byte(getResp), &result)
 	if jsonErr != nil {
 		return nil, jsonErr

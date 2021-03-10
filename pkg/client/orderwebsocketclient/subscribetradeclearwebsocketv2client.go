@@ -1,8 +1,10 @@
 package orderwebsocketclient
 
 import (
-	"encoding/json"
 	"fmt"
+
+	jsoniter "github.com/json-iterator/go"
+
 	"github.com/yveshield/huobi_golang/logging/applogger"
 	"github.com/yveshield/huobi_golang/pkg/client/websocketclientbase"
 	"github.com/yveshield/huobi_golang/pkg/model/order"
@@ -50,6 +52,7 @@ func (p *SubscribeTradeClearWebSocketV2Client) UnSubscribe(symbol string, client
 
 func (p *SubscribeTradeClearWebSocketV2Client) handleMessage(msg string) (interface{}, error) {
 	result := order.SubscribeTradeClearResponse{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	err := json.Unmarshal([]byte(msg), &result)
 	return result, err
 }
