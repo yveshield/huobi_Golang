@@ -10,12 +10,10 @@ type GetSymbolsResponse struct {
 type Symbol struct {
 	BaseCurrency           string          `json:"base-currency"`
 	QuoteCurrency          string          `json:"quote-currency"`
-	PricePrecision         int             `json:"price-precision"`
-	AmountPrecision        int             `json:"amount-precision"`
 	SymbolPartition        string          `json:"symbol-partition"`
 	Symbol                 string          `json:"symbol"`
 	State                  string          `json:"state"`
-	ValuePrecision         int             `json:"value-precision"`
+	ApiTrading             string          `json:"api-trading"`
 	LimitOrderMinOrderAmt  decimal.Decimal `json:"limit-order-min-order-amt"`
 	LimitOrderMaxOrderAmt  decimal.Decimal `json:"limit-order-max-order-amt"`
 	SellMarketMinOrderAmt  decimal.Decimal `json:"sell-market-min-order-amt"`
@@ -24,4 +22,7 @@ type Symbol struct {
 	MinOrderValue          decimal.Decimal `json:"min-order-value"`
 	MaxOrderValue          decimal.Decimal `json:"max-order-value"`
 	LeverageRatio          decimal.Decimal `json:"leverage-ratio"`
+	PricePrecision         int             `json:"price-precision"`
+	AmountPrecision        int             `json:"amount-precision"`
+	ValuePrecision         int             `json:"value-precision"`
 }
